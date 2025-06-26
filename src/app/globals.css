@@ -1,29 +1,6 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 /* Investment Advisor Styles - Modern Futuristic Theme */
 
@@ -910,33 +887,452 @@ body {
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .summary-grid, 
-  .recommendations-grid, 
-  .insights-grid, 
-  .steps-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 1024px) {
+  .investment-advisor-container {
+    padding: 1.5rem;
   }
   
-  .recommendation-header, 
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .savings-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .advisor-title {
+    font-size: 2.2rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .investment-advisor-container {
+    padding: 1rem;
+  }
+  
+  .advisor-title {
+    font-size: 2rem;
+  }
+  
+  .advisor-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .intro-panel {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .savings-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .goal-column,
+  .time-horizon-container,
+  .risk-container,
+  .savings-amount-container,
+  .currency-container {
+    padding: 1.25rem;
+  }
+  
+  .risk-options {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .risk-option {
+    padding: 1rem;
+  }
+  
+  /* Results section mobile */
+  .results-section {
+    padding: 1.5rem;
+  }
+  
   .results-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
   
+  .results-title {
+    font-size: 1.75rem;
+  }
+  
   .results-buttons {
     width: 100%;
     justify-content: space-between;
   }
+  
+  .summary-grid,
+  .recommendations-grid,
+  .insights-grid,
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .recommendation-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .allocation-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
+/* Small tablets and large phones */
+@media (max-width: 640px) {
+  .investment-advisor-container {
+    padding: 0.75rem;
+  }
+  
+  .advisor-title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  
+  .advisor-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .intro-panel {
+    padding: 1rem;
+  }
+  
+  .goal-column,
+  .time-horizon-container,
+  .risk-container,
+  .savings-amount-container,
+  .currency-container {
+    padding: 1rem;
+  }
+  
+  .goal-option {
+    padding: 0.75rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .goal-icon {
+    font-size: 1.25rem;
+  }
+  
+  .submit-button {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+  
+  /* Results section adjustments */
+  .results-section {
+    padding: 1rem;
+  }
+  
+  .summary-card,
+  .recommendation-card,
+  .insight-card {
+    padding: 1.25rem;
+  }
+  
+  .card-title,
+  .section-title {
+    font-size: 1.1rem;
+  }
+  
+  .investment-amount {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile phones */
 @media (max-width: 480px) {
+  .investment-advisor-container {
+    padding: 0.5rem;
+    min-height: 100vh;
+  }
+  
+  .advisor-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .advisor-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .intro-panel {
+    padding: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  
+  .intro-text {
+    font-size: 0.9rem;
+  }
+  
+  .form-container {
+    max-width: 100%;
+  }
+  
+  .goal-column,
+  .time-horizon-container,
+  .risk-container,
+  .savings-amount-container,
+  .currency-container {
+    padding: 0.875rem;
+  }
+  
+  .form-label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .goal-option {
+    padding: 0.625rem;
+  }
+  
+  .goal-name {
+    font-size: 0.9rem;
+  }
+  
+  .goal-description {
+    font-size: 0.8rem;
+  }
+  
+  .form-select,
+  .form-input {
+    padding: 0.625rem;
+    font-size: 0.9rem;
+  }
+  
+  .risk-option {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .risk-level-name {
+    font-size: 0.85rem;
+  }
+  
+  .risk-level-description {
+    font-size: 0.75rem;
+  }
+  
+  .submit-button {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Results section mobile optimizations */
+  .results-section {
+    padding: 0.75rem;
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .results-title {
+    font-size: 1.5rem;
+  }
+  
+  .results-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  
+  .reset-button,
+  .print-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.625rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .summary-card,
+  .recommendation-card,
+  .insight-card,
+  .step-card {
+    padding: 1rem;
+  }
+  
+  .card-title,
+  .section-title {
+    font-size: 1rem;
+  }
+  
+  .summary-text,
+  .recommendation-description,
+  .insight-text,
+  .step-text {
+    font-size: 0.85rem;
+  }
+  
+  .investment-amount {
+    font-size: 1rem;
+  }
+  
+  .expected-return {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
   .step-card {
     flex-direction: column;
+    text-align: center;
   }
   
   .step-number {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    align-self: center;
+  }
+  
+  .step-content {
+    text-align: left;
+  }
+  
+  .disclaimer-section {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .disclaimer-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+  .investment-advisor-container {
+    padding: 0.25rem;
+  }
+  
+  .advisor-title {
+    font-size: 1.25rem;
+  }
+  
+  .advisor-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .intro-panel,
+  .goal-column,
+  .time-horizon-container,
+  .risk-container,
+  .savings-amount-container,
+  .currency-container {
+    padding: 0.75rem;
+  }
+  
+  .goal-option {
+    padding: 0.5rem;
+  }
+  
+  .form-select,
+  .form-input {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .submit-button {
+    padding: 0.625rem;
+    font-size: 0.85rem;
+  }
+  
+  .results-section {
+    padding: 0.5rem;
+  }
+  
+  .summary-card,
+  .recommendation-card,
+  .insight-card,
+  .step-card {
+    padding: 0.75rem;
+  }
+  
+  .card-title,
+  .section-title {
+    font-size: 0.95rem;
+  }
+  
+  .results-title {
+    font-size: 1.25rem;
+  }
+  
+  .investment-amount {
+    font-size: 0.95rem;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  .goal-option,
+  .risk-option,
+  .submit-button,
+  .reset-button,
+  .print-button {
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  .form-select,
+  .form-input {
+    min-height: 44px;
+  }
+  
+  /* Remove hover effects on touch devices */
+  .goal-option:hover,
+  .risk-option:hover,
+  .submit-button:hover,
+  .recommendation-card:hover {
+    transform: none;
+  }
+}
+
+/* Landscape orientation adjustments for phones */
+@media (max-width: 768px) and (orientation: landscape) {
+  .investment-advisor-container {
+    padding: 0.75rem;
+  }
+  
+  .advisor-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .advisor-subtitle {
+    margin-bottom: 1rem;
+  }
+  
+  .intro-panel {
+    margin-bottom: 1rem;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .savings-grid {
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+  }
+  
+  .risk-options {
+    flex-direction: row;
+    gap: 0.5rem;
   }
 }
