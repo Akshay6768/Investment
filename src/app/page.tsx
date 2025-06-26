@@ -9,6 +9,24 @@ import {
   formatCurrency
 } from '@/app/api/InvestmentApi'; // Update this path to match your project structure
 
+// Define types for market data
+interface MarketData {
+  'Global Quote'?: {
+    '05. price'?: string;
+    '09. change'?: string;
+    '10. change percent'?: string;
+  };
+}
+
+interface BondYields {
+  // Add properties as needed based on your API response
+  [key: string]: unknown;
+}
+
+interface IndianMarketData {
+  // Add properties as needed based on your API response
+  [key: string]: unknown;
+}
 
 const InvestmentAdvisor: React.FC = () => {
   const [formData, setFormData] = useState<InvestmentFormData>({
@@ -24,9 +42,9 @@ const InvestmentAdvisor: React.FC = () => {
   const [hasResults, setHasResults] = useState<boolean>(false);
   const [isCustomizing, setIsCustomizing] = useState<boolean>(false);
   const [customAllocations, setCustomAllocations] = useState<Record<string, number>>({});
-  const [marketData, setMarketData] = useState<any>(null);
-  const [bondYields, setBondYields] = useState<any>(null);
-  const [indianMarketData, setIndianMarketData] = useState<any>(null);
+  const [marketData, setMarketData] = useState<MarketData | null>(null);
+  const [bondYields, setBondYields] = useState<BondYields | null>(null);
+  const [indianMarketData, setIndianMarketData] = useState<IndianMarketData | null>(null);
   const [currencySymbol, setCurrencySymbol] = useState<string>('$');
   const [error, setError] = useState<string | null>(null);
 
@@ -416,12 +434,23 @@ const InvestmentAdvisor: React.FC = () => {
                 {bondYields ? (
                   <div className="bond-info">
                     <p className="summary-text">
-                     
-
+                      {/* Bond data display - using currencySymbol and displayCurrency */}
+                      <span className="bold-text">Bond Yields:</span>{' '}
+                      <span className="medium-text">{currencySymbol} {displayCurrency(1000)}</span>
                     </p>
                   </div>
                 ) : (
                   <p className="summary-text muted-text">Bond data unavailable</p>
+                )}
+
+                {/* Using indianMarketData */}
+                {indianMarketData && (
+                  <div className="indian-market-info">
+                    <p className="summary-text">
+                      <span className="bold-text">Indian Market:</span>{' '}
+                      <span className="medium-text">Data available</span>
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
@@ -514,7 +543,7 @@ const InvestmentAdvisor: React.FC = () => {
                 <p className="insight-text">
                   Your {formData.timeHorizon}-year investment horizon for {formData.investmentGoal === 'wealth' ? 'wealth building' : formData.investmentGoal} 
                   allows for {formData.timeHorizon < 5 ? 'shorter-term strategies focused on stability' : 'longer-term strategies that can weather market cycles'}. 
-                  We've aligned asset allocations with this timeframe.
+                  We&apos;ve aligned asset allocations with this timeframe.
                 </p>
               </div>
               <div className="insight-card">
@@ -544,7 +573,7 @@ const InvestmentAdvisor: React.FC = () => {
                 <div className="step-content">
                   <h4 className="step-title">Open Investment Accounts</h4>
                   <p className="step-text">
-                    Set up brokerage accounts if you don't already have them. Consider tax-advantaged accounts when applicable.
+                    Set up brokerage accounts if you don&apos;t already have them. Consider tax-advantaged accounts when applicable.
                   </p>
                 </div>
               </div>
