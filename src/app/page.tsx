@@ -23,8 +23,11 @@ interface BondYields {
   [key: string]: unknown;
 }
 
+// Updated IndianMarketData interface to match expected structure
 interface IndianMarketData {
-  // Add properties as needed based on your API response
+  nifty50?: number;
+  sensex?: number;
+  dailyChange?: number;
   [key: string]: unknown;
 }
 
@@ -130,9 +133,10 @@ const InvestmentAdvisor: React.FC = () => {
       
       if (result.success) {
         setRecommendations(result.recommendations);
-        setMarketData(result.marketData);
-        setBondYields(result.bondYields);
-        setIndianMarketData(result.indianMarketData);
+        setMarketData(result.marketData || null);
+        setBondYields(result.bondYields || null);
+        // Fixed: Handle undefined indianMarketData properly
+        setIndianMarketData(result.indianMarketData || null);
         setCurrencySymbol(result.currencySymbol);
       } else {
         setRecommendations(result.recommendations);
@@ -169,6 +173,8 @@ const InvestmentAdvisor: React.FC = () => {
     });
     setRecommendations([]);
     setHasResults(false);
+    setMarketData(null);
+    setBondYields(null);
     setIndianMarketData(null);
     setCurrencySymbol('$');
     setError(null);
@@ -412,18 +418,19 @@ const InvestmentAdvisor: React.FC = () => {
                 <span className="growth-text">
                 ₹{Math.round(formData.savingsAmount * Math.pow(1.085, formData.timeHorizon) - formData.savingsAmount).toLocaleString()}
                 </span>
-              </p><div className="market-info-container">
+              </p>
+              <div className="market-info-container">
                 <h3 className="card-title">Market Information</h3>
-                {marketData ? (
+                {marketData?.['Global Quote'] ? (
                   <div className="market-info">
                     <p className="summary-text">
                       <span className="bold-text">S&P 500 Price:</span>{' '}
-                      <span className="medium-text">₹{parseFloat(marketData['Global Quote']?.['05. price'] || '0').toFixed(2)}</span>
+                      <span className="medium-text">₹{parseFloat(marketData['Global Quote']['05. price'] || '0').toFixed(2)}</span>
                     </p>
                     <p className="summary-text">
                       <span className="bold-text">Daily Change:</span>{' '}
-                      <span className={`${parseFloat(marketData['Global Quote']?.['09. change'] || '0') >= 0 ? 'growth-text' : 'loss-text'}`}>
-                        {parseFloat(marketData['Global Quote']?.['10. change percent'] || '0').toFixed(2)}%
+                      <span className={`${parseFloat(marketData['Global Quote']['09. change'] || '0') >= 0 ? 'growth-text' : 'loss-text'}`}>
+                        {parseFloat(marketData['Global Quote']['10. change percent'] || '0').toFixed(2)}%
                       </span>
                     </p>
                   </div>
@@ -448,7 +455,12 @@ const InvestmentAdvisor: React.FC = () => {
                   <div className="indian-market-info">
                     <p className="summary-text">
                       <span className="bold-text">Indian Market:</span>{' '}
-                      <span className="medium-text">Data available</span>
+                      <span className="medium-text">
+                        {indianMarketData.nifty50 && indianMarketData.sensex 
+                          ? `NIFTY: ${indianMarketData.nifty50}, SENSEX: ${indianMarketData.sensex}` 
+                          : 'Data available'
+                        }
+                      </span>
                     </p>
                   </div>
                 )}
